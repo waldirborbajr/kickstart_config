@@ -613,12 +613,31 @@ require('lazy').setup {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        go = { 'gofmt', 'gofumpt', 'goimports', 'golines' },
+        markdown = { 'prettier' },
+        json = { 'prettierd' },
+        yaml = { 'prettierd' },
+        rust = { 'rustfmt' },
+        toml = { 'taplo' },
+        sh = { 'shfmt' },
+        zsh = { 'shfmt' },
+        bash = { 'shfmt' },
+        -- Missing Markdownlint
+        ['*'] = { 'trim_whitespace', 'trim_newlines' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+      },
+      formatters = {
+        shfmt = {
+          prepend_args = { '-i', '2', '-ci' },
+        },
+        beautysh = {
+          prepend_args = { '-i', '2' },
+        },
       },
     },
   },
@@ -814,7 +833,7 @@ require('lazy').setup {
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
